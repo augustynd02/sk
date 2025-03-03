@@ -4,7 +4,14 @@
 
 :root {
     --color-background: rgb(245, 242, 242);
-    --color-primary: #a7907f;
+    --color-primary-100: rgb(206, 186, 171);
+    --color-primary-200: rgb(196, 173, 157);
+    --color-primary-300: rgb(181, 158, 142);
+    --color-primary-400: rgb(167, 144, 127);
+    --color-primary-500: rgb(152, 129, 112);
+    --color-primary-600: rgb(137, 114, 97);
+    --color-primary-700: rgb(122, 99, 82);
+
     --color-border: #C0C0C0;
 
     --color-text: #333333;
@@ -33,7 +40,8 @@ html {
 }
 
 body {
-    line-height: 1.4;
+    line-height: 1.6;
     background-color: var(--color-background);
     color: var(--color-text);
+    height: 400vh;
 }
