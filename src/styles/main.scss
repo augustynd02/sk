@@ -30,6 +30,9 @@
     --size-icon-medium: 2rem;
     --size-icon-large: 3rem;
 
+    --font-header: Constantia;
+    --font-normal: Roboto;
+
     --shadow-normal: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     --site-width: 60%;
@@ -44,4 +47,12 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     height: 400vh;
+}
+
+section {
+    margin: var(--spacing-section) 0;
+}
+
+h2 {
+    font-family: var(--font-header);
 }
