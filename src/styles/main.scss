@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -30,8 +32,8 @@
     --size-icon-medium: 2rem;
     --size-icon-large: 3rem;
 
-    --font-header: Constantia;
-    --font-normal: Roboto;
+    --font-header: Raleway;
+    --font-normal: Montserrat;
 
     --shadow-normal: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
@@ -47,12 +49,19 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     height: 400vh;
+
+    font-family: var(--font-normal);
 }
 
 section {
     margin: var(--spacing-section) 0;
 }
 
-h2 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-header);
+    color: var(--color-text);
+}
+
+p {
+    color: var(--color-text-secondary);
 }
