@@ -1,5 +1,6 @@
 header {
     position: sticky;
+    top: 0px;
     height: 90px;
     width: 100%;
 
@@ -7,6 +8,8 @@ header {
     align-items: center;
 
     border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    z-index: 9999;
 
     .logo {
         position: absolute;
