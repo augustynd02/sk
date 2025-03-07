@@ -1,0 +1,62 @@
+#o-mnie {
+    h2 {
+        font-size: 4em;
+        text-align: center;
+        text-transform: uppercase;
+        margin: var(--spacing-large) 0;
+        font-style: italic;
+        letter-spacing: 4px;
+    }
+}
+
+.about-container {
+    width: 70%;
+    margin: 0 auto;
+
+    display: flex;
+    gap: var(--spacing-large);
+}
+
+.about-item {
+    display: flex;
+    flex-direction: column;
+
+    &:nth-child(1) {
+        flex-direction: column-reverse;
+
+        .photo-container {
+            margin: 5rem 0;
+        }
+        .text-container {
+            padding-right: var(--spacing-large);
+        }
+    }
+    &:nth-child(2) {
+        .text-container {
+            padding-left: var(--spacing-large);
+        }
+    }
+
+    .photo-container {
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .text-container {
+        h3 {
+            margin: var(--spacing-large) 0;
+
+            line-height: 1.2;
+            font-size: 3em;
+            font-weight: 200;
+        }
+        p {
+            margin: var(--spacing-medium) 0;
+        }
+        b {
+            font-weight: bold;
+            color: var(--color-primary-700);
+        }
+    }
+}
