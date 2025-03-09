@@ -20,6 +20,7 @@
 
 .about-item {
     display: flex;
+    flex-direction: column;
 
     &:nth-child(1) {
         flex-direction: column-reverse;
@@ -54,6 +55,7 @@
         }
 
         p {
+            font-size: 0.9em;
             margin: var(--spacing-medium) 0;
         }
 
