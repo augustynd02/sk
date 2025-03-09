@@ -1,0 +1,111 @@
+footer {
+    padding: var(--spacing-large);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+    align-items: center;
+
+    background-color: var(--color-primary-400);
+
+    .logo-container {
+        img {
+            height: 200px;
+        }
+    }
+
+    .links-container {
+        ul {
+            display: flex;
+            gap: var(--spacing-medium);
+
+            li {
+                text-transform: uppercase;
+
+                a {
+                    position: relative;
+                    color: white;
+                }
+
+                a::before {
+                    content: "";
+                    position: absolute;
+                    bottom: -6px;
+                    left: 50%;
+                    width: 0;
+                    height: 3px;
+
+                    background-color: white;
+                    transition: 0.2s ease-out;
+                }
+
+                a:hover::before {
+                    width: 100%;
+                    left: 0;
+                }
+            }
+        }
+    }
+
+    .info-container {
+        text-align: center;
+    }
+
+    .icons-container {
+        ul {
+            display: flex;
+            gap: var(--spacing-medium);
+        }
+
+        a {
+            transition: 0.2s;
+        }
+
+        a:hover:has(svg.instagram-icon) {
+            border-color: rgb(194, 67, 194);
+
+            svg {
+                color: rgb(194, 67, 194);
+            }
+        }
+
+        a:hover:has(svg.facebook-icon) {
+            border-color: rgb(102, 116, 238);
+
+            svg {
+                color: rgb(102, 116, 238);
+            }
+        }
+
+        a:hover:has(svg.mail-icon) {
+            border-color: rgb(235, 131, 62);
+
+            svg {
+                color: rgb(235, 131, 62);
+            }
+        }
+
+        a:hover:has(svg.phone-icon) {
+            border-color: rgb(9, 134, 5);
+
+            svg {
+                color: rgb(9, 134, 5);
+            }
+        }
+
+        a {
+            display: grid;
+            place-items: center;
+            border: 1px solid white;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+
+        svg {
+            height: var(--size-icon-medium);
+            width: var(--size-icon-medium);
+            color: white;
+            transition: 0.2s;
+        }
+    }
+}
