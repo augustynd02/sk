@@ -48,9 +48,10 @@ body {
     line-height: 1.6;
     background-color: var(--color-background);
     color: var(--color-text);
-    height: 400vh;
 
     font-family: var(--font-normal);
+
+    overflow-x: hidden;
 }
 
 section {
