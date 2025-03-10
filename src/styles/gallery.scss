@@ -1,0 +1,20 @@
+.gallery-container {
+    display: flex;
+
+    height: 400px;
+
+    .item {
+        transition: 0.2s ease-in;
+        margin: 0 var(--spacing-medium);
+        img {
+            height: 100%;
+        }
+    }
+
+    .active {
+        transform: scale(1.1);
+        margin: 0 var(--spacing-large);
+    }
+}
+
+
