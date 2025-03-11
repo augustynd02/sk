@@ -1,20 +1,25 @@
 .gallery-container {
     display: flex;
-
     height: 400px;
-
-    .item {
+    cursor: grab;
+    user-select: none;
+    .item, .clone {
+        display: block;
         transition: 0.2s ease-in;
         margin: 0 var(--spacing-medium);
+        flex-shrink: 0;
         img {
             height: 100%;
+            pointer-events: none;
         }
     }
-
     .active {
         transform: scale(1.1);
         margin: 0 var(--spacing-large);
+        z-index: 10;
     }
 }
 
-
+.gallery-container:active {
+    cursor: grabbing;
+}
