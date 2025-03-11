@@ -100,4 +100,52 @@ header {
             color: rgb(9, 134, 5);
         }
     }
+
+    button {
+        display: none;
+        width: var(--size-icon-large);
+        height: var(--size-icon-large);
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    header {
+
+        .logo {
+            position: static;
+            left: var(--spacing-medium);
+            transform: translateX(0);
+        }
+        nav {
+            gap: var(--spacing-medium);
+            .links-left {
+                margin-right: 0;
+            }
+
+            .links-right {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    header {
+        nav {
+            .links-left {
+                display: none;
+            }
+            .links-right {
+                display: none;
+            }
+        }
+        button {
+            display: block;
+        }
+    }
 }
