@@ -158,6 +158,25 @@ window.addEventListener("load", () => {
         }
     }
 
+    function centerInitialItem() {
+        const viewportCenter = window.innerWidth / 2;
+
+        const itemIndex = 0;
+
+        const positions = calculateItemPositions();
+
+        const itemCenter = positions[itemIndex + totalItemCount].center;
+
+        galleryX = itemCenter - viewportCenter;
+
+        gallery.style.transform = `translateX(${-galleryX}px)`;
+
+        activeIndex = itemIndex;
+        updateActiveClass(activeIndex);
+
+        adjustGalleryPosition();
+    }
+
     function snapToClosestItem() {
         const positions = calculateItemPositions();
         const centerViewport = window.innerWidth / 2;
@@ -325,6 +344,10 @@ window.addEventListener("load", () => {
             }
         }
     });
+
+    setTimeout(() => {
+        centerInitialItem();
+    }, 100);
 
     setTimeout(() => {
         activeIndex = determineActiveItem();
