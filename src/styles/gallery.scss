@@ -3,16 +3,25 @@
     height: 400px;
     cursor: grab;
     user-select: none;
+    overflow: visible;
+
     .item, .clone {
         display: block;
         transition: 0.2s ease-in;
         margin: 0 var(--spacing-medium);
         flex-shrink: 0;
+        height: 100%;
+        width: auto;
+        max-width: 70vw;
+
         img {
             height: 100%;
+            width: 100%;
+            object-fit: cover;
             pointer-events: none;
         }
     }
+
     .active {
         transform: scale(1.1);
         margin: 0 var(--spacing-large);
@@ -22,4 +31,28 @@
 
 .gallery-container:active {
     cursor: grabbing;
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        height: 300px;
+
+        .item, .clone {
+            max-width: 60vw;
+        }
+
+        .active {
+
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        height: 220px;
+
+        .item, .clone {
+            max-width: 50vw;
+        }
+    }
 }
