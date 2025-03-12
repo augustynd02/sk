@@ -1,5 +1,5 @@
 #szkolenia {
-    padding: var(--spacing-large) 0;
+    padding: var(--spacing-large);
 
     display: flex;
     gap: var(--spacing-large);
@@ -16,7 +16,8 @@
 }
 
 .offers-text {
-    width: 25%;
+    width: max(25%, 400px);
+    max-width: 100%;
     text-align: center;
 
     h2 {
@@ -32,7 +33,7 @@
 }
 
 .offers-container {
-    width: 60%;
+    width: min(1280px, 100%);
     margin: 0 auto;
     flex: 1;
 
@@ -113,5 +114,15 @@
                 transform: translateX(8px);
             }
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .offers-container {
+        flex-direction: column;
+    }
+
+    .offer-item {
+        width: 100%;
     }
 }
