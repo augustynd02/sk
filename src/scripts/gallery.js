@@ -16,6 +16,7 @@ window.addEventListener("load", () => {
     let timestamp = 0;
     let animationFrame = null;
     let isAdjusting = false;
+    let hasMoved = false;
 
     function setupGallery() {
         galleryItems.forEach(item => {
@@ -27,11 +28,24 @@ window.addEventListener("load", () => {
             itemWidths.push(width);
             itemMargins.push({ left: marginLeft, right: marginRight });
             galleryWidth += width + marginLeft + marginRight;
+
+            item.addEventListener('click', function(e) {
+                if (isDragging || hasMoved) {
+                    e.preventDefault();
+                }
+            });
         });
 
         galleryItems.forEach(item => {
             const clone = item.cloneNode(true);
             clone.classList.add("clone");
+
+            clone.addEventListener('click', function(e) {
+                if (isDragging || hasMoved) {
+                    e.preventDefault();
+                }
+            });
+
             gallery.appendChild(clone);
         });
     }
@@ -202,6 +216,7 @@ window.addEventListener("load", () => {
         }
 
         isDragging = true;
+        hasMoved = false;
         initialX = clientX;
         lastX = clientX;
         timestamp = Date.now();
@@ -214,6 +229,11 @@ window.addEventListener("load", () => {
         if (!isDragging) return;
 
         const deltaX = initialX - clientX;
+
+        if (Math.abs(deltaX) > 5) {
+            hasMoved = true;
+        }
+
         initialX = clientX;
 
         const now = Date.now();
@@ -246,6 +266,10 @@ window.addEventListener("load", () => {
         } else {
             snapToClosestItem();
         }
+
+        setTimeout(() => {
+            hasMoved = false;
+        }, 100);
     }
 
     setupGallery();
