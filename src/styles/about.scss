@@ -2,7 +2,6 @@
     h2 {
         margin: var(--spacing-large) 0;
 
-        font-size: 4em;
         text-align: center;
         text-transform: uppercase;
         font-style: italic;
@@ -52,8 +51,8 @@
             margin: var(--spacing-large) 0;
             line-height: 1.2;
 
-            font-size: clamp(2em, 2vw, 3em);
-            font-weight: 200;
+            font-size: clamp(1.5em, 1.5vw, 2em);
+            font-weight: 400;
         }
 
         p {
