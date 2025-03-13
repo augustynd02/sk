@@ -9,67 +9,48 @@ window.addEventListener("load", () => {
     let largestWidth = 0;
     let itemWidths = [];
     let itemMargins = [];
-    let totalItemCount = 0;
+    let totalItemCount = galleryItems.length;
     let activeIndex = 0;
-
     let velocityX = 0;
     let lastX = 0;
     let timestamp = 0;
     let animationFrame = null;
     let isAdjusting = false;
 
-    // setup gallery - calculate total width and clone nodes
-    galleryItems.forEach(item => {
-        const width = item.offsetWidth;
-        const marginLeft = parseInt(getComputedStyle(item).marginLeft);
-        const marginRight = parseInt(getComputedStyle(item).marginRight);
+    function setupGallery() {
+        galleryItems.forEach(item => {
+            const width = item.offsetWidth;
+            const marginLeft = parseInt(getComputedStyle(item).marginLeft);
+            const marginRight = parseInt(getComputedStyle(item).marginRight);
 
-        if (width > largestWidth) {
-            largestWidth = width;
-        }
+            largestWidth = Math.max(largestWidth, width);
+            itemWidths.push(width);
+            itemMargins.push({ left: marginLeft, right: marginRight });
+            galleryWidth += width + marginLeft + marginRight;
+        });
 
-        itemWidths.push(width);
-        itemMargins.push({ left: marginLeft, right: marginRight });
-        galleryWidth += width + marginLeft + marginRight;
-    });
-
-    totalItemCount = galleryItems.length;
-
-    galleryItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        clone.classList.add("clone");
-        gallery.appendChild(clone);
-    });
-
+        galleryItems.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add("clone");
+            gallery.appendChild(clone);
+        });
+    }
 
     function calculateItemPositions() {
         const positions = [];
         let currentPosition = 0;
 
-        for (let i = 0; i < totalItemCount; i++) {
-            const itemWidth = itemWidths[i];
-            const itemMargin = itemMargins[i];
+        for (let i = 0; i < totalItemCount * 2; i++) {
+            const idx = i % totalItemCount;
+            const itemWidth = itemWidths[idx];
+            const itemMargin = itemMargins[idx];
 
             positions.push({
                 start: currentPosition,
                 center: currentPosition + (itemWidth / 2) + itemMargin.left,
                 end: currentPosition + itemWidth + itemMargin.left + itemMargin.right,
-                index: i
-            });
-
-            currentPosition += itemWidth + itemMargin.left + itemMargin.right;
-        }
-
-        // 2nd time for clones
-        for (let i = 0; i < totalItemCount; i++) {
-            const itemWidth = itemWidths[i];
-            const itemMargin = itemMargins[i];
-
-            positions.push({
-                start: currentPosition,
-                center: currentPosition + (itemWidth / 2) + itemMargin.left,
-                end: currentPosition + itemWidth + itemMargin.left + itemMargin.right,
-                index: i
+                width: itemWidth,
+                index: idx
             });
 
             currentPosition += itemWidth + itemMargin.left + itemMargin.right;
@@ -100,11 +81,7 @@ window.addEventListener("load", () => {
     function updateActiveClass(index) {
         const allItems = document.querySelectorAll(".item, .clone");
         allItems.forEach((item, i) => {
-            if (i % totalItemCount === index) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
+            item.classList.toggle('active', i % totalItemCount === index);
         });
     }
 
@@ -113,18 +90,15 @@ window.addEventListener("load", () => {
 
         isAdjusting = true;
         activeIndex = determineActiveItem();
-
         const originalVelocity = velocityX;
 
-        // scrolling right
         if (galleryX > galleryWidth) {
-            galleryX = galleryX % galleryWidth;
+            galleryX %= galleryWidth;
             gallery.style.transition = 'none';
             gallery.style.transform = `translateX(${-galleryX}px)`;
             gallery.offsetHeight;
         }
 
-        // scrolling left
         if (galleryX < 0) {
             galleryX = galleryWidth + (galleryX % galleryWidth);
             gallery.style.transition = 'none';
@@ -133,9 +107,7 @@ window.addEventListener("load", () => {
         }
 
         updateActiveClass(activeIndex);
-
         velocityX = originalVelocity;
-
         isAdjusting = false;
     }
 
@@ -158,29 +130,10 @@ window.addEventListener("load", () => {
         }
     }
 
-    function centerInitialItem() {
-        const viewportCenter = window.innerWidth / 2;
-
-        const itemIndex = 0;
-
-        const positions = calculateItemPositions();
-
-        const itemCenter = positions[itemIndex + totalItemCount].center;
-
-        galleryX = itemCenter - viewportCenter;
-
-        gallery.style.transform = `translateX(${-galleryX}px)`;
-
-        activeIndex = itemIndex;
-        updateActiveClass(activeIndex);
-
-        adjustGalleryPosition();
-    }
-
     function snapToClosestItem() {
         const positions = calculateItemPositions();
-        const centerViewport = window.innerWidth / 2;
-        const centerGallery = galleryX + centerViewport;
+        const viewportCenter = window.innerWidth / 2;
+        const centerGallery = galleryX + viewportCenter;
 
         let closestItem = null;
         let closestDistance = Infinity;
@@ -194,7 +147,7 @@ window.addEventListener("load", () => {
         });
 
         if (closestItem) {
-            const targetX = closestItem.center - centerViewport;
+            const targetX = closestItem.center - viewportCenter;
 
             gallery.style.transition = '0.3s ease-out';
             galleryX = targetX;
@@ -211,146 +164,123 @@ window.addEventListener("load", () => {
         }
     }
 
-    gallery.addEventListener('mousedown', (e) => {
-        e.preventDefault();
+    function centerInitialItem() {
+        const viewportCenter = window.innerWidth / 2;
+        const positions = calculateItemPositions();
+        const itemToCenter = positions[totalItemCount];
 
+        galleryX = itemToCenter.center - viewportCenter;
+        gallery.style.transform = `translateX(${-galleryX}px)`;
+
+        activeIndex = 0;
+        updateActiveClass(activeIndex);
+
+        setTimeout(snapToClosestItem, 50);
+    }
+
+    function recalculateGalleryDimensions() {
+        galleryWidth = 0;
+
+        galleryItems.forEach((item, index) => {
+            const width = item.offsetWidth;
+            const marginLeft = parseInt(getComputedStyle(item).marginLeft);
+            const marginRight = parseInt(getComputedStyle(item).marginRight);
+
+            itemWidths[index] = width;
+            itemMargins[index] = { left: marginLeft, right: marginRight };
+            galleryWidth += width + marginLeft + marginRight;
+            largestWidth = Math.max(largestWidth, width);
+        });
+
+        snapToClosestItem();
+    }
+
+    function handleDragStart(clientX) {
         if (animationFrame) {
             cancelAnimationFrame(animationFrame);
             animationFrame = null;
         }
 
         isDragging = true;
-        initialX = e.clientX;
-        lastX = e.clientX;
+        initialX = clientX;
+        lastX = clientX;
         timestamp = Date.now();
         velocityX = 0;
 
         gallery.style.transition = 'none';
-    });
+    }
 
-    gallery.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const deltaX = initialX - e.clientX;
-            initialX = e.clientX;
+    function handleDragMove(clientX) {
+        if (!isDragging) return;
 
-            const now = Date.now();
-            const dt = now - timestamp;
-            if (dt > 0) {
-                velocityX = (lastX - e.clientX) / dt * 20;
-            }
-            lastX = e.clientX;
-            timestamp = now;
+        const deltaX = initialX - clientX;
+        initialX = clientX;
 
-            galleryX += deltaX;
-            gallery.style.transform = `translateX(${-galleryX}px)`;
-
-            if (galleryX > galleryWidth || galleryX < 0) {
-                adjustGalleryPosition();
-            }
-
-            activeIndex = determineActiveItem();
-            updateActiveClass(activeIndex);
+        const now = Date.now();
+        const dt = now - timestamp;
+        if (dt > 0) {
+            velocityX = (lastX - clientX) / dt * 20;
         }
-    });
+        lastX = clientX;
+        timestamp = now;
 
-    gallery.addEventListener('mouseup', () => {
-        if (isDragging) {
-            isDragging = false;
+        galleryX += deltaX;
+        gallery.style.transform = `translateX(${-galleryX}px)`;
 
-            if (Math.abs(velocityX) > 0.5) {
-                gallery.style.transition = 'none';
-                animationFrame = requestAnimationFrame(momentumScroll);
-            } else {
-                snapToClosestItem();
-            }
-        }
-    });
-
-    window.addEventListener('mouseup', () => {
-        if (isDragging) {
-            isDragging = false;
-
-            if (Math.abs(velocityX) > 0.5) {
-                gallery.style.transition = 'none';
-                animationFrame = requestAnimationFrame(momentumScroll);
-            } else {
-                snapToClosestItem();
-            }
-        }
-    });
-
-    window.addEventListener('mouseleave', () => {
-        if (isDragging) {
-            isDragging = false;
-
-            if (Math.abs(velocityX) > 0.5) {
-                gallery.style.transition = 'none';
-                animationFrame = requestAnimationFrame(momentumScroll);
-            } else {
-                snapToClosestItem();
-            }
-        }
-    });
-
-    gallery.addEventListener('touchstart', (e) => {
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = null;
+        if (galleryX > galleryWidth || galleryX < 0) {
+            adjustGalleryPosition();
         }
 
-        isDragging = true;
-        initialX = e.touches[0].clientX;
-        lastX = e.touches[0].clientX;
-        timestamp = Date.now();
-        velocityX = 0;
-
-        gallery.style.transition = 'none';
-    });
-
-    gallery.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-            const deltaX = initialX - e.touches[0].clientX;
-            initialX = e.touches[0].clientX;
-
-            const now = Date.now();
-            const dt = now - timestamp;
-            if (dt > 0) {
-                velocityX = (lastX - e.touches[0].clientX) / dt * 20;
-            }
-            lastX = e.touches[0].clientX;
-            timestamp = now;
-
-            galleryX += deltaX;
-            gallery.style.transform = `translateX(${-galleryX}px)`;
-
-            if (galleryX > galleryWidth || galleryX < 0) {
-                adjustGalleryPosition();
-            }
-
-            activeIndex = determineActiveItem();
-            updateActiveClass(activeIndex);
-        }
-    });
-
-    gallery.addEventListener('touchend', () => {
-        if (isDragging) {
-            isDragging = false;
-
-            if (Math.abs(velocityX) > 0.5) {
-                gallery.style.transition = 'none';
-                animationFrame = requestAnimationFrame(momentumScroll);
-            } else {
-                snapToClosestItem();
-            }
-        }
-    });
-
-    setTimeout(() => {
-        centerInitialItem();
-    }, 100);
-
-    setTimeout(() => {
         activeIndex = determineActiveItem();
         updateActiveClass(activeIndex);
-    }, 100);
+    }
+
+    function handleDragEnd() {
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        if (Math.abs(velocityX) > 0.5) {
+            gallery.style.transition = 'none';
+            animationFrame = requestAnimationFrame(momentumScroll);
+        } else {
+            snapToClosestItem();
+        }
+    }
+
+    setupGallery();
+
+    gallery.addEventListener('mousedown', e => {
+        e.preventDefault();
+        handleDragStart(e.clientX);
+    });
+
+    gallery.addEventListener('mousemove', e => handleDragMove(e.clientX));
+    gallery.addEventListener('mouseup', handleDragEnd);
+    window.addEventListener('mouseup', handleDragEnd);
+    window.addEventListener('mouseleave', handleDragEnd);
+
+    gallery.addEventListener('touchstart', e => handleDragStart(e.touches[0].clientX));
+    gallery.addEventListener('touchmove', e => handleDragMove(e.touches[0].clientX));
+    gallery.addEventListener('touchend', handleDragEnd);
+
+    gallery.querySelectorAll('img').forEach(img => {
+        img.addEventListener('load', () => {
+            setTimeout(() => {
+                galleryItems.forEach((item, index) => {
+                    itemWidths[index] = item.offsetWidth;
+                });
+                snapToClosestItem();
+            }, 100);
+        });
+    });
+
+    window.addEventListener('resize', () => setTimeout(snapToClosestItem, 100));
+
+    setTimeout(() => {
+        recalculateGalleryDimensions();
+        centerInitialItem();
+    }, 500);
+
+    window.addEventListener('load', () => setTimeout(recalculateGalleryDimensions, 1000));
 });
