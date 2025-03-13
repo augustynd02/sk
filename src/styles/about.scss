@@ -52,7 +52,7 @@
             margin: var(--spacing-large) 0;
             line-height: 1.2;
 
-            font-size: 3em;
+            font-size: clamp(2em, 2vw, 3em);
             font-weight: 200;
         }
 
