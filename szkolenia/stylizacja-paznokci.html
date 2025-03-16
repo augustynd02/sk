@@ -9,17 +9,19 @@
     <link rel="stylesheet" href="../src/styles/header.scss">
     <link rel="stylesheet" href="../src/styles/paznokcie.scss">
     <link rel="stylesheet" href="../src/styles/gallery-v2.scss">
+    <link rel="stylesheet" href="../src/styles/contact.scss">
     <link rel="stylesheet" href="../src/styles/footer.scss">
     <script src="../src/scripts/gallery-v2.js" defer></script>
+    <script src="../src/scripts/mobileMenu.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
-            <a href="#">
-                <img src="../src/assets/images/SK-black-min.svg" alt="Logo" class="logo" />
+            <a href="#" class="logo-container">
+                <img src="./src/assets/images/SK-black-min.svg" alt="Logo" class="logo" />
             </a>
 
-            <ul class="links-left">
+            <ul class="links-left" id="mobileMenu">
                 <li>
                     <a href="#">Home</a>
                 </li>
@@ -37,8 +39,7 @@
                 </li>
             </ul>
 
-
-            <ul class="links-right">
+            <ul class="links-right" id="mobileMenuSocial">
                 <li>
                     <a href="https://www.instagram.com/sylvia.kozlowska/" target="_blank">
                         <svg class="instagram-icon" stroke="currentColor" fill="currentColor" stroke-width="0"
@@ -81,11 +82,15 @@
                     </a>
                 </li>
             </ul>
-            <button>
-                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <button id="menuToggle">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                    stroke-linejoin="round" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
             </button>
         </nav>
-
     </header>
 
     <main>
@@ -102,8 +107,8 @@
             <div class="items-container">
                 <div class="item">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 2H9l-.35.15-.65.64-.65-.64L7 2H1.5l-.5.5v10l.5.5h5.29l.86.85h.7l.86-.85h5.29l.5-.5v-10l-.5-.5zm-7 10.32l-.18-.17L7 12H2V3h4.79l.74.74-.03 8.58zM14 12H9l-.35.15-.14.13V3.7l.7-.7H14v9zM6 5H3v1h3V5zm0 4H3v1h3V9zM3 7h3v1H3V7zm10-2h-3v1h3V5zm-3 2h3v1h-3V7zm0 2h3v1h-3V9z"></path></svg>
-                    <h3>Ekspercka wiedza</h3>
-                    <p>Podczas szkolenia przekazuję Ci swoją wiedzę opartą na moim 20-letnim doświadczeniu, oferując praktyczne wskazówki, które od razu możesz zastosować w swojej pracy.</p>
+                    <h3>Profesjonalizm</h3>
+                    <p>Podczas szkolenia przekazuję Ci wiedzę opartą na 20-letnim doświadczeniu, oferując praktyczne wskazówki, które możesz zastosować w swojej pracy.</p>
                 </div>
                 <div class="item">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" aria-hidden="true" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z"></path></svg>
@@ -115,6 +120,20 @@
                     <h3>Elastyczność</h3>
                     <p>Dostosowuję tempo szkolenia do Twoich indywidualnych potrzeb, pozwalając Ci uczyć się w sposób, który najlepiej pasuje do Twojego stylu pracy.</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="slideshow-container">
+            <button type="button" class="slideshow-control__left" data-direction="left"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></button>
+            <button type="button" class="slideshow-control__right" data-direction="right"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></button>
+            <div class="slideshow" data-current-index="0">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776528429-f73dd0586329?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776528646-6403e47575dd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776529303-7a1dd5801436?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776529108-a750eb12d3c8?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776528414-107d27179b93?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <img src="https://images.unsplash.com/photo-1693776526826-f5e105c54da3?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
             </div>
         </div>
 
@@ -214,19 +233,46 @@
             </div>
         </div>
 
-        <div class="slideshow-container">
-            <button type="button" class="slideshow-control__left" data-direction="left"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></button>
-            <button type="button" class="slideshow-control__right" data-direction="right"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></button>
-            <div class="slideshow" data-current-index="0">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776528429-f73dd0586329?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776528646-6403e47575dd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776529303-7a1dd5801436?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776529108-a750eb12d3c8?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776528414-107d27179b93?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <img src="https://images.unsplash.com/photo-1693776526826-f5e105c54da3?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+        <section id="kontakt">
+            <div class="contact-container">
+                <div class="image-container">
+
+                </div>
+                <div class="content-container">
+                    <form action="">
+                        <div class="form-title">
+                            <h2>Kontakt</h2>
+                            <p>Wyślij wiadomość, zadaj pytanie, umów się na szkolenie lub rozmowę.</p>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Adres e-mail</label>
+                            <input type="email" name="email" id="email" placeholder=" ">
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Wiadomość</label>
+                            <textarea name="message" id="message" placeholder=" "></textarea>
+                        </div>
+                        <button>Wyślij</button>
+                    </form>
+                    <div class="location">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5462.854265390397!2d17.035142779979576!3d51.11344760178196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fe9c2d4b58abf%3A0xb70956aec205e0f5!2zV3JvY8WCYXc!5e0!3m2!1sen!2spl!4v1742129503828!5m2!1sen!2spl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="other-contact">
+                        <span>lub zadzwoń</span>
+                        <p>
+                            <svg class="phone-icon" stroke="currentColor" fill="currentColor" stroke-width="0"
+                                viewBox="0 0 24 24" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                <path
+                                    d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57a.84.84 0 0 0-.31-.05c-.26 0-.51.1-.71.29l-2.2 2.2a15.149 15.149 0 0 1-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1z">
+                                </path>
+                            </svg>
+                            +48 123 456 789
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer>
