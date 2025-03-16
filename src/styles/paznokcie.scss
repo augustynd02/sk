@@ -37,6 +37,7 @@ main {
             position: relative;
             z-index: 2;
 
+            margin: 0 var(--spacing-medium);
             font-size: clamp(3em, 4vw + 1.2em, 4em);
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -46,8 +47,10 @@ main {
     }
 
     .welcome-message {
-        width: 60%;
+        width: 100%;
+        max-width: 800px;
         margin: 0 auto;
+        padding: 0 var(--spacing-large);
         text-align: center;
 
         h2 {
@@ -167,20 +170,12 @@ main {
     }
 }
 
-// @media screen and (max-width: 1200px) {
-//     main .traits .items-container .item {
-//         svg {
-//             width: 100px;
-//             height: 100px;
-//         }
-//     }
-// }
-
 @media screen and (max-width: 900px) {
     main {
         .info-container {
             .info {
                 flex-direction: column;
+                gap: var(--spacing-section);
             }
             .item {
                 width: 100%;
