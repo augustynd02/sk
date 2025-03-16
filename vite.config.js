@@ -1,12 +1,13 @@
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: "index.html",
-        szkolenia: "szkolenia/stylizacja-paznokci.html",
-      },
-    },
-  },
+        main: resolve(__dirname, 'index.html'),
+        paznokcie: resolve(__dirname, 'szkolenia/stylizacja-paznokci.html'),
+      }
+    }
+  }
 });
