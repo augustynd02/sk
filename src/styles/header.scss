@@ -13,6 +13,12 @@ header {
     z-index: 9999;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .logo {
         position: absolute;
         top: 0;
@@ -117,7 +123,8 @@ header {
     header {
 
         .logo {
-            left: var(--spacing-medium);
+            position: relative;
+            left: 0;
             transform: translateX(0);
         }
         nav {

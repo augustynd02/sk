@@ -51,8 +51,6 @@ body {
     color: var(--color-text);
 
     font-family: var(--font-normal);
-
-    overflow-x: hidden;
 }
 
 section {
@@ -72,7 +70,7 @@ h2 {
     font-size: clamp(2rem, 3vw + 1rem, 2.5rem);
 }
 
-p {
+p, input, label {
     font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
     color: var(--color-text-secondary);
 }

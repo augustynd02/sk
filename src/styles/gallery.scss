@@ -1,6 +1,7 @@
 #galeria {
     padding: 2rem 0;
-    background-color: var(--color-primary-100);
+    background: radial-gradient(var(--color-background), var(--color-primary-400));
+    overflow-x: hidden;
 
     h2 {
         margin-bottom: var(--spacing-large);
