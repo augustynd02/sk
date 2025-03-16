@@ -27,14 +27,18 @@
                 align-items: center;
                 gap: 1rem;
 
-                h2 {
-                    text-align: center;
-                    text-transform: uppercase;
-                    letter-spacing: 4px;
-                    font-size: clamp(1.5em, 2vw + 0.6em, 2em);
+                .form-title {
                     margin: 1rem 0;
-                    font-weight: 300;
+                    text-align: center;
+                    h2 {
+                        text-transform: uppercase;
+                        letter-spacing: 4px;
+                        font-size: clamp(1.5em, 2vw + 0.6em, 2em);
+                        font-weight: 300;
+                    }
+
                 }
+
 
                 .input-group {
                     position: relative;

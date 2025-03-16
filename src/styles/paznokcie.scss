@@ -67,10 +67,14 @@ main {
             display: flex;
             max-width: 1260px;
             margin: 0 auto;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-large);
+            padding: var(--spacing-large);
 
             .item {
-                padding: var(--spacing-large);
+                width: 30%;
+                min-width: 300px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -86,12 +90,13 @@ main {
                 h3 {
                     color: var(--color-background);
                     text-transform: uppercase;
-                    font-size: clamp(1em, 3vw + 0.8em, 1.5em);
+                    font-size: clamp(0.8em, 2vw + 0.8em, 1.5em);
                     font-weight: 600;
                     letter-spacing: 4px;
                 }
 
                 p {
+                    font-size: clamp(0.6em, 1.5vw + 0.8em, 0.9em);
                     color: var(--color-background);
                 }
             }
@@ -101,6 +106,7 @@ main {
     .info-container {
         display: flex;
         flex-direction: column;
+        padding: 0 var(--spacing-large);
 
         h2 {
             text-align: center;
@@ -156,6 +162,28 @@ main {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+// @media screen and (max-width: 1200px) {
+//     main .traits .items-container .item {
+//         svg {
+//             width: 100px;
+//             height: 100px;
+//         }
+//     }
+// }
+
+@media screen and (max-width: 900px) {
+    main {
+        .info-container {
+            .info {
+                flex-direction: column;
+            }
+            .item {
+                width: 100%;
             }
         }
     }
