@@ -24,7 +24,7 @@
                 <img src="./src/assets/images/SK-black-min.svg" alt="Logo" class="logo" />
             </a>
 
-            <ul class="links-left">
+            <ul class="links-left" id="mobileMenu">
                 <li>
                     <a href="#">Home</a>
                 </li>
@@ -42,8 +42,7 @@
                 </li>
             </ul>
 
-
-            <ul class="links-right">
+            <ul class="links-right" id="mobileMenuSocial">
                 <li>
                     <a href="https://www.instagram.com/sylvia.kozlowska/" target="_blank">
                         <svg class="instagram-icon" stroke="currentColor" fill="currentColor" stroke-width="0"
@@ -86,7 +85,7 @@
                     </a>
                 </li>
             </ul>
-            <button>
+            <button id="menuToggle">
                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
                     stroke-linejoin="round" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -95,7 +94,6 @@
                 </svg>
             </button>
         </nav>
-
     </header>
 
     <section id="home">
@@ -276,7 +274,10 @@
             </div>
             <div class="content-container">
                 <form action="">
-                    <h2>Skontaktuj się ze mną</h2>
+                    <div class="form-title">
+                        <h2>Kontakt</h2>
+                        <p>Wyślij wiadomość, zadaj pytanie, umów się na szkolenie lub rozmowę.</p>
+                    </div>
                     <div class="input-group">
                         <label for="email">Adres e-mail</label>
                         <input type="email" name="email" id="email" placeholder=" ">
