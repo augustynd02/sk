@@ -1,5 +1,5 @@
 {
     "routes": [
-      { "src": "/szkolenia/(.*)", "dest": "/szkolenia/$1" }
+      { "src": "/szkolenia/(.*)", "dest": "/szkolenia/$1.html" }
     ]
   }
