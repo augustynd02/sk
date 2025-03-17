@@ -23,9 +23,10 @@ slideshows.forEach(slideshowContainer => {
     })
 })
 
-const moveSlideshow = (slideshow, carouselNavigation, direction) => {
+const moveSlideshow = (slideshow, direction) => {
     const slideshowLength = slideshow.children.length;
     let currentIndex = parseInt(slideshow.getAttribute('data-current-index'));
+    const carouselNavigation = slideshow.parentElement.querySelector('.carousel-navigation');
     let currentDot = carouselNavigation.querySelector(`[data-index="${currentIndex}"]`);
     let nextIndex;
 
