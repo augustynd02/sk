@@ -1,5 +1,7 @@
 {
-    "routes": [
-      { "src": "/szkolenia/(.*)", "dest": "/szkolenia/$1.html" }
-    ]
-  }
+  "routes": [
+    { "src": "/szkolenia/wybielanie-zębów", "dest": "/szkolenia/wybielanie-zębów.html" },
+    { "src": "/szkolenia/stylizacja-paznokci", "dest": "/szkolenia/stylizacja-paznokci.html" },
+    { "src": "/szkolenia/(.*)", "dest": "/szkolenia/$1.html" }
+  ]
+}
