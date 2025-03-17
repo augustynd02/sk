@@ -3,7 +3,8 @@
     position: relative;
     width: 100%;
     max-width: 1260px;
-    height: 700px;
+    max-height: 700px;
+    aspect-ratio: 16/9;
     overflow: hidden;
 }
 
@@ -113,5 +114,11 @@
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .slideshow-container {
+        height: 400px;
     }
 }
