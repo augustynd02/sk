@@ -81,7 +81,7 @@ main {
                 align-items: center;
 
                 text-align: center;
-                color: var(--color-background);
+                color: white;
 
                 svg {
                     width: 150px;
@@ -93,12 +93,12 @@ main {
                     font-weight: 600;
                     letter-spacing: 4px;
                     text-transform: uppercase;
-                    color: var(--color-background);
+                    color: white;
                 }
 
                 p {
                     font-size: clamp(0.6em, 1.5vw + 0.8em, 0.9em);
-                    color: var(--color-background);
+                    color: white;
                 }
             }
         }
@@ -113,7 +113,6 @@ main {
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: var(--color-primary-400);
         }
 
         p {
