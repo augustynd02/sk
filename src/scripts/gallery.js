@@ -17,8 +17,13 @@ window.addEventListener("load", () => {
     let animationFrame = null;
     let isAdjusting = false;
     let hasMoved = false;
+    let lastViewportWidth = window.innerWidth;
 
     function setupGallery() {
+        itemWidths = [];
+        itemMargins = [];
+        galleryWidth = 0;
+
         galleryItems.forEach(item => {
             const width = item.offsetWidth;
             const marginLeft = parseInt(getComputedStyle(item).marginLeft);
@@ -35,6 +40,11 @@ window.addEventListener("load", () => {
                 }
             });
         });
+    }
+
+    function recalculateClones() {
+        const existingClones = gallery.querySelectorAll('.clone');
+        existingClones.forEach(clone => clone.remove());
 
         galleryItems.forEach(item => {
             const clone = item.cloneNode(true);
@@ -178,35 +188,58 @@ window.addEventListener("load", () => {
         }
     }
 
+    function centerCurrentItem() {
+        const viewportCenter = window.innerWidth / 2;
+        const positions = calculateItemPositions();
+
+        const currentCenteredItem = positions.find(pos => pos.index === activeIndex);
+
+        if (currentCenteredItem) {
+            galleryX = currentCenteredItem.center - viewportCenter;
+
+            gallery.style.transition = 'none';
+            gallery.style.transform = `translateX(${-galleryX}px)`;
+
+            updateActiveClass(activeIndex);
+        }
+    }
+
+    function recalculateGalleryDimensions() {
+        setupGallery();
+        recalculateClones();
+    }
+
+    function handleResize() {
+        if (Math.abs(window.innerWidth - lastViewportWidth) > 10) {
+            gallery.style.transition = 'none';
+
+            recalculateGalleryDimensions();
+
+            centerCurrentItem();
+
+            lastViewportWidth = window.innerWidth;
+
+            setTimeout(() => {
+                gallery.style.transition = '0.2s ease-in';
+            }, 50);
+        }
+    }
+
     function centerInitialItem() {
         const viewportCenter = window.innerWidth / 2;
         const positions = calculateItemPositions();
+
         const itemToCenter = positions[totalItemCount];
 
         galleryX = itemToCenter.center - viewportCenter;
+
         gallery.style.transform = `translateX(${-galleryX}px)`;
 
         activeIndex = 0;
         updateActiveClass(activeIndex);
 
+
         setTimeout(snapToClosestItem, 50);
-    }
-
-    function recalculateGalleryDimensions() {
-        galleryWidth = 0;
-
-        galleryItems.forEach((item, index) => {
-            const width = item.offsetWidth;
-            const marginLeft = parseInt(getComputedStyle(item).marginLeft);
-            const marginRight = parseInt(getComputedStyle(item).marginRight);
-
-            itemWidths[index] = width;
-            itemMargins[index] = { left: marginLeft, right: marginRight };
-            galleryWidth += width + marginLeft + marginRight;
-            largestWidth = Math.max(largestWidth, width);
-        });
-
-        snapToClosestItem();
     }
 
     function handleDragStart(clientX) {
@@ -273,6 +306,7 @@ window.addEventListener("load", () => {
     }
 
     setupGallery();
+    recalculateClones();
 
     gallery.addEventListener('mousedown', e => {
         e.preventDefault();
@@ -299,7 +333,10 @@ window.addEventListener("load", () => {
         });
     });
 
-    window.addEventListener('resize', () => setTimeout(snapToClosestItem, 100));
+    window.addEventListener('resize', () => {
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(handleResize, 250);
+    });
 
     setTimeout(() => {
         recalculateGalleryDimensions();
